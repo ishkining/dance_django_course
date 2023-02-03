@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
 
 dict_days = {
     'monday': 'Deals at Monday:\n'
@@ -20,6 +21,7 @@ def day_of_week(request, day):
         is_it_digital = False
     if is_it_digital:
         if int(day) <= len(dict_days):
+            redirect_url = reverse('day-of-week-name', args=[list(dict_days)[int(day) - 1]])
             return HttpResponseRedirect(f'/todo_week/{list(dict_days)[int(day) - 1]}/')
         else:
             return HttpResponseNotFound(f'Not found this number {day}')

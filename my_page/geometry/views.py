@@ -1,6 +1,8 @@
+from math import pi
+
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from math import pi
+from django.urls import reverse
 
 
 def find_rectangle(request, width, height):
@@ -16,12 +18,15 @@ def find_circle(request, radius):
 
 
 def get_rectangle(request, width, height):
-    return HttpResponseRedirect(f'/calculate_geometry/rectangle/{width}/{height}')
+    redirect_url = reverse('rectangle-name', args=(width, height))
+    return HttpResponseRedirect(redirect_url)
 
 
 def get_square(request, width):
-    return HttpResponseRedirect(f'/calculate_geometry/square/{width}')
+    redirect_url = reverse('square-name', args=(width, ))
+    return HttpResponseRedirect(redirect_url)
 
 
 def get_circle(request, radius):
-    return HttpResponseRedirect(f'/calculate_geometry/circle/{radius}')
+    redirect_url = reverse('circle-name', args=(radius, ))
+    return HttpResponseRedirect(redirect_url)
