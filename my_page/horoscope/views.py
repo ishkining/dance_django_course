@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
+from django.template.loader import render_to_string
+from dataclasses import dataclass
 
 zodiac_dict = {
     'aries': ['Знак зодиака Овена', (3, 21), (4, 19)],
@@ -56,10 +58,24 @@ def find_by_date(request, month, day):
     return HttpResponseNotFound(f'Not found by this date {month}-{day}')
 
 
+@dataclass
+class Person:
+    name: str
+    age: int
+
+    def __str__(self):
+        return f'This is {self.name} and {self.age} years old'
+
+
 def get_info_about_sign_zodiac(request, sign_zodiac: str):
     description = zodiac_dict.get(sign_zodiac, None)
+    data = {
+        'description_zodiac': description[0],
+        'sign_zodiac': sign_zodiac.title(),
+        'my_class': Person('Will', 55)
+    }
     if description:
-        return HttpResponse(description[0])
+        return render(request, 'horoscope/info-zodiac.html', context=data)
     else:
         return HttpResponseNotFound(f'Unknown request - {sign_zodiac}')
 
