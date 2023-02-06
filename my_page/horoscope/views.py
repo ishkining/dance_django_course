@@ -20,12 +20,10 @@ types_nature = {
 
 
 def index(request):
-    response = '<ol>'
-    for sign in zodiac_dict.keys():
-        redirect_url = reverse('horoscope-name', args=[sign])
-        response += f'<li> <a href="{redirect_url}">{sign.title()}</a> </li>'
-    response += '</ol>'
-    return HttpResponse(response)
+    context = {
+        'zodiac_keys': zodiac_dict.keys(),
+    }
+    return render(request, 'horoscope/index.html', context=context)
 
 
 def types(request):
