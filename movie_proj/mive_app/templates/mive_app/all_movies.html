@@ -9,7 +9,7 @@
     <h2>All Movies</h2>
     <ol>
         {% for movie in movies %}
-            <li>name - {{ movie.name }},
+            <li>name - <a href="{{ movie.get_url }}">{{ movie.name }}</a>,
                 rating - {{ movie.rating }},
                 year - {{ movie.year|default:"Unknown" }},
                 budget - {{ movie.budget }}</li>
