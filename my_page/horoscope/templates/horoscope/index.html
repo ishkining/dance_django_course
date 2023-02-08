@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 
+{% load static %}
+{% load my_filter %}
+
+{% block css_link %}
+<link rel="stylesheet" href=" {% static 'horoscope/css/index.css' %}">
+{% endblock %}
+
 {% block title %}
     Menu
 {% endblock %}
 
 {% block content %}
     <ol>
-    {% for sign in zodiac_keys %}
-        <li><a href="{% url 'horoscope-name' sign_zodiac=sign %}">{{ sign|title }}</a></li>
+    {% for zodiac, desc_zodiac in zodiac_dict.items %}
+        <li><a href="{% url 'horoscope-name' sign_zodiac=zodiac %}">{{ desc_zodiac|first|split|last }}</a></li>
     {% endfor %}
     </ol>
 {% endblock %}

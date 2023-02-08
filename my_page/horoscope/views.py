@@ -21,7 +21,7 @@ types_nature = {
 
 def index(request):
     context = {
-        'zodiac_keys': zodiac_dict.keys(),
+        'zodiac_dict': zodiac_dict,
     }
     return render(request, 'horoscope/index.html', context=context)
 
