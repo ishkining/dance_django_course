@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+admin.site.site_header = 'Our AdminSpace'
+admin.site.index_title = 'Our Description'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mive_app.urls')),
