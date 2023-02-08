@@ -1,0 +1,18 @@
+
+{% extends 'mive_app/base.html' %}
+
+{% block title %}
+    All Movies
+{% endblock %}
+
+{% block content %}
+    <h2>All Movies</h2>
+    <ol>
+        {% for movie in movies %}
+            <li>name - {{ movie.name }},
+                rating - {{ movie.rating }},
+                year - {{ movie.year|default:"Unknown" }},
+                budget - {{ movie.budget }}</li>
+        {% endfor %}
+    </ol>
+{% endblock %}
