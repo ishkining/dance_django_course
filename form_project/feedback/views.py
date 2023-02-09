@@ -1,18 +1,24 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import FeedbackForm
+from .models import FeedBack
 
 
 def index(request):
-    form = FeedbackForm()
     if request.method == 'POST':
-        name = request.POST['name']
-        if len(name) == 0:
-            return render(request, 'feedback/feedback.html', context={
-                'form': form
-            })
-        print(name)
-        return HttpResponseRedirect('/done')
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            feed = FeedBack(
+                name=form.cleaned_data['name'],
+                surname=form.cleaned_data['surname'],
+                feedback=form.cleaned_data['feedback'],
+                rating=form.cleaned_data['rating'],
+            )
+            feed.save()
+            return HttpResponseRedirect('/done')
+    else:
+        form = FeedbackForm()
     return render(request, 'feedback/feedback.html', context={
         'form': form
     })
