@@ -1,0 +1,17 @@
+{% extends 'mive_app/base.html' %}
+
+{% block title %}
+    Diretors's info
+{% endblock %}
+
+
+{% block content %}
+    <h3>{{ director.first_name }}</h3>
+    <h3>{{ director.last_name }}</h3>
+    <h3>{{ director.director_email }}</h3>
+    <ul>
+        {% for movie in director.movie_set.all %}
+            <li>{{ movie }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

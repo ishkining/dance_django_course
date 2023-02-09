@@ -1,0 +1,12 @@
+{% extends 'mive_app/base.html' %}
+
+{% block title %}
+    List of Directors
+{% endblock %}
+
+{% block content %}
+    <h2>List of Directors</h2>
+    {% for director in directors %}
+        <h3><a href="{% url 'director_name' director.id %}">{{ director.first_name }} {{ director.last_name }}</a></h3>
+    {% endfor %}
+{% endblock %}

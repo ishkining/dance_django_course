@@ -9,4 +9,16 @@
     <h2>Info about film</h2>
     <h3>{{ movie }}</h3>
 
+    <hr>
+    <h3>{{ movie.director.first_name }}</h3>
+    <h3>{{ movie.director.last_name }}</h3>
+
+    <hr>
+    <ul>
+        {% for actor in movie.actors.all %}
+            <li><a href="{% url 'actor_name' actor.id %}">
+                {{ actor.first_name }}
+            </a></li>
+        {% endfor %}
+    </ul>
 {% endblock %}

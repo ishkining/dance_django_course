@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Movie
+from .models import Movie, Director, Actor
 from django.db.models import QuerySet
 
 
@@ -41,6 +41,7 @@ class MovieAdmin(admin.ModelAdmin):
     actions = ['set_dollars']
     search_fields = ['name__startswith']
     list_filter = ['name', 'currency', RatingFilter]
+    filter_horizontal = ['actors']
 
     @admin.display(ordering='rating', description='Status')
     def rating_status(self, movie: Movie):
@@ -57,3 +58,5 @@ class MovieAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Movie, MovieAdmin)
+admin.site.register(Director)
+admin.site.register(Actor)

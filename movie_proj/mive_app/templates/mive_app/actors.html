@@ -1,0 +1,12 @@
+{% extends 'mive_app/base.html' %}
+
+{% block title %}
+    List of Actors
+{% endblock %}
+
+{% block content %}
+    <h2>List of Actors</h2>
+    {% for actor in actors %}
+        <h3><a href="{% url 'actor_name' actor.id %}">{{ actor.first_name }} {{ actor.last_name }}</a></h3>
+    {% endfor %}
+{% endblock %}
