@@ -1,9 +1,13 @@
 from django.contrib import admin
-from .models import Movie, Director, Actor
+from .models import Movie, Director, Actor, DressingRoom
 from django.db.models import QuerySet
 
 
 # Register your models here.
+
+class DressingRoomAdmin(admin.ModelAdmin):
+    list_display = ['floor', 'number', 'actor']
+
 
 class RatingFilter(admin.SimpleListFilter):
     title = 'Rating Filter'
@@ -30,8 +34,8 @@ class RatingFilter(admin.SimpleListFilter):
 
 
 class MovieAdmin(admin.ModelAdmin):
-    #fields = ['name', 'rating']
-    #exclude = ['slug', 'budget']
+    # fields = ['name', 'rating']
+    # exclude = ['slug', 'budget']
     readonly_fields = ['year']
     prepopulated_fields = {'slug': ('name',)}
     list_display = ['name', 'rating', 'currency', 'budget']
@@ -60,3 +64,4 @@ class MovieAdmin(admin.ModelAdmin):
 admin.site.register(Movie, MovieAdmin)
 admin.site.register(Director)
 admin.site.register(Actor)
+admin.site.register(DressingRoom, DressingRoomAdmin)
